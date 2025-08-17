@@ -6,7 +6,7 @@
 #define TAM_NAVIO 3
 
 // Inicializa o tabuleiro com 0 (água) usando recursão
-void inicilaizadorTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
+void inicilaizarTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
     if (i >= TAM) return;
 
     tabuleiro[i][j] = AGUA;
@@ -32,22 +32,22 @@ void exibirTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
         }
 }
 
-// Posiciona navio horizontalmente com recursão
+// Posicionar navio horizontalmente com recursão
 void posicionarHorizontal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
 
-    // Só posiciona se não ultrapassar os limites
+    // Só posicionar se não ultrapassar os limites
     if (linha < TAM && coluna <TAM) {
         tabuleiro[linha][coluna] = NAVIO;
         posicionarNavioHorizontal(tabuleiro, linha, coluna + 1, tamanho - 1);
     }
 }
 
-// Posiciona navio verticalmente com recursão
+// Posicionar navio verticalmente com recursão
 void posicionarNavioVertical(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
 
-    // Só posiciona se não ultrapassar os limites
+    // Só posicionar se não ultrapassar os limites
     if (linha < TAM && coluna < TAM) {
         tabuleiro[linha][coluna] = NAVIO;
         posicionarNavioVertical(tabuleiro, linha + 1, coluna, tamanho - 1);
