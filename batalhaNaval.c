@@ -12,9 +12,9 @@ void inicilaizadorTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
     tabuleiro[i][j] = AGUA;
 
     if (j + 1 < TAM) {
-        inicializadorTabuleiro(tabuleiro, i, j + 1);
+        inicializarTabuleiro(tabuleiro, i, j + 1);
     } else {
-        inicializadorTabuleiro(tabuleiro, i + 1, 0);
+        inicializarTabuleiro(tabuleiro, i + 1, 0);
     }
 }
 
