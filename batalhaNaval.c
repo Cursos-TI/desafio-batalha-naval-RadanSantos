@@ -6,7 +6,7 @@
 #define TAM_NAVIO 3
 
 // Inicializa o tabuleiro com 0 (água) usando recursão
-void inicilaizarTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
+void inicializarTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
     if (i >= TAM) return;
 
     tabuleiro[i][j] = AGUA;
