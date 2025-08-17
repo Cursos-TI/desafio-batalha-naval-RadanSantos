@@ -33,7 +33,7 @@ void exibirTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
 }
 
 // Posicionar navio horizontalmente com recursão
-void posicionarHorizontal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
+void posicionarNavioHorizontal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
 
     // Só posicionar se não ultrapassar os limites
