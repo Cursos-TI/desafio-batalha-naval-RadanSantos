@@ -35,7 +35,6 @@ void exibirTabuleiro(int tabuleiro[TAM][TAM], int linha, int coluna) {
 void posicionarNavioHorizontal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
 
-    // Só posicionar se não ultrapassar os limites
     if (linha < TAM && coluna <TAM) {
         tabuleiro[linha][coluna] = NAVIO;
         posicionarNavioHorizontal(tabuleiro, linha, coluna + 1, tamanho - 1);
