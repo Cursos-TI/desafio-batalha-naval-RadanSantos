@@ -76,8 +76,8 @@ int main() {
     inicializarTabuleiro(tabuleiro, 0, 0);
 
     // Dois navios horizontais/verticais
-    posicionarNavioHorizontal(tabuleiro, 0, 0, TAM_NAVIO); // Linha 0, col 0
-    posicionarNavioVertical(tabuleiro, 2, 5, TAM_NAVIO); //linha 2, col 5
+    posicionarNavioHorizontal(tabuleiro, 0, 0, TAM_NAVIO);   // Linha 0, col 0
+    posicionarNavioVertical(tabuleiro, 2, 5, TAM_NAVIO);     // Linha 2, col 5
 
     // Dois navios diagonais
     posicionarNavioDiagonalPrincipal(tabuleiro, 4, 0, TAM_NAVIO); // ↘
