@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>  // para abs()
 
 #define TAM 10        // Tamanho do tabuleiro
 #define AGUA 0        // Representa água
@@ -121,6 +122,7 @@ void aplicarHabilidade(int tabuleiro[TAM][TAM], int habilidade[TAM_HAB][TAM_HAB]
         }
     }
 }
+
 
 
 
