@@ -1,93 +1,91 @@
 #include <stdio.h>
 
 #define TAM 10
-#define TAM_NAVIO 4
-#define AGUA '~'
-#define NAVIO 'N'
+#define NAVIO 1
+#define AGUA 0
+#define TAM_NAVIO 3
 
-// Inicializar o tabuleiro recursivamente
-void inicializarTabuleiro(int tabuleiro[TAM][TAM], int linha, int coluna) {
-    if (linha >= TAM) return;
+// Protótipos
+void inicializarTabuleiro(int tabuleiro[TAM][TAM], int i, int j);
+void exibirTabuleiro(int tabuleiro[TAM][TAM], int i, int j);
+void posicionarNavioHorizontal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho);
+void posicionarNavioVertical(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho);
+void posicionarNavioDiagonalPrincipal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho);
+void posicionarNavioDiagonalInversa(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho);
 
-    tabuleiro[linha][coluna] = AGUA;
-
-    if (coluna ==TAM -1)
-        inicializarTabuleiro(tabuleiro, linha + 1, 0);
-     else 
-        inicializarTabuleiro(tabuleiro, linha, coluna + 1);
+// Inicializar recursivamente
+void inicializarTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
+    if (i >= TAM) return;
+    tabuleiro[i][j] = AGUA;
+    if (j < TAM - 1) inicializarTabuleiro(tabuleiro, i, j + 1);
+    else inicializarTabuleiro(tabuleiro, i + 1, 0);
 }
 
-// Exibir tabuleiro recursivamente
-void exibirTabuleiro(int tabuleiro[TAM][TAM], int linha, int coluna) {
-    if (linha == TAM) return;
-
-    printf("%c ", tabuleiro[linha][coluna]);
-
-    if (coluna == TAM - 1) {
-        exibirTabuleiro(tabuleiro, linha + 1, 0);
-    } else {
+// Exibir recursivamente
+void exibirTabuleiro(int tabuleiro[TAM][TAM], int i, int j) {
+    if (i >= TAM) return;
+    if (tabuleiro[i][j] == AGUA) printf(" ~ ");
+    else printf(" N ");
+    if (j < TAM - 1) exibirTabuleiro(tabuleiro, i, j + 1);
+    else {
         printf("\n");
-        exibirTabuleiro(tabuleiro, linha, coluna + 1);
-        }
+        exibirTabuleiro(tabuleiro, i + 1, 0);
+    }
 }
 
-// Posicionar navio horizontalmente 
+// Navio horizontal
 void posicionarNavioHorizontal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
-
-    if (linha < TAM && coluna <TAM) {
+    if (linha < TAM && coluna < TAM) {
         tabuleiro[linha][coluna] = NAVIO;
         posicionarNavioHorizontal(tabuleiro, linha, coluna + 1, tamanho - 1);
     }
 }
 
-// Posicionar navio verticalmente
+// Navio vertical
 void posicionarNavioVertical(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
-
     if (linha < TAM && coluna < TAM) {
         tabuleiro[linha][coluna] = NAVIO;
         posicionarNavioVertical(tabuleiro, linha + 1, coluna, tamanho - 1);
     }
 }
 
-// Posicionar navio na diagonal principal(↘)
+// Navio diagonal principal
 void posicionarNavioDiagonalPrincipal(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
-
-    if (linha , TAM && coluna < TAM) {
+    if (linha < TAM && coluna < TAM) {
         tabuleiro[linha][coluna] = NAVIO;
-        posicionarNavioDiagonalPrincipal(tabuleiro, linha + 1, coluna + 1, tamanho -1);
+        posicionarNavioDiagonalPrincipal(tabuleiro, linha + 1, coluna + 1, tamanho - 1);
     }
 }
 
-// Posicionar navio na diagonal secundária (↙)
-void posicionarNavioDiagonalSecundaria(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
+// Navio diagonal inversa
+void posicionarNavioDiagonalInversa(int tabuleiro[TAM][TAM], int linha, int coluna, int tamanho) {
     if (tamanho == 0) return;
-
     if (linha < TAM && coluna >= 0) {
         tabuleiro[linha][coluna] = NAVIO;
-        posicionarNavioDiagonalSecundaria(tabuleiro, linha + 1, coluna -1, tamanho - 1);
+        posicionarNavioDiagonalInversa(tabuleiro, linha + 1, coluna - 1, tamanho - 1);
     }
 }
 
 int main() {
     int tabuleiro[TAM][TAM];
+
     inicializarTabuleiro(tabuleiro, 0, 0);
 
-    // Dois navios horizontais/verticais
-    posicionarNavioHorizontal(tabuleiro, 0, 0, TAM_NAVIO);   // Linha 0, col 0
-    posicionarNavioVertical(tabuleiro, 2, 5, TAM_NAVIO);     // Linha 2, col 5
+    // Posiciona 4 navios fixos para teste
+    posicionarNavioHorizontal(tabuleiro, 0, 0, TAM_NAVIO);
+    posicionarNavioVertical(tabuleiro, 2, 5, TAM_NAVIO);
+    posicionarNavioDiagonalPrincipal(tabuleiro, 5, 0, TAM_NAVIO);
+    posicionarNavioDiagonalInversa(tabuleiro, 0, 9, TAM_NAVIO);
 
-    // Dois navios diagonais
-    posicionarNavioDiagonalPrincipal(tabuleiro, 4, 0, TAM_NAVIO); // ↘
-    posicionarNavioDiagonalSecundaria(tabuleiro, 1, 9, TAM_NAVIO); // ↙
-
-    printf("\nTabuleiro 10x10 com navios:\n\n");
+    printf("\nTabuleiro de Batalha Naval:\n\n");
     exibirTabuleiro(tabuleiro, 0, 0);
 
     return 0;
 }
+
 
 
     
